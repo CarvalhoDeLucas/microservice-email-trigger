@@ -1,21 +1,22 @@
 package com.carvalho.emailservice.application;
 
-import com.carvalho.emailservice.adapters.EmailSenderGatewar;
-import com.carvalho.emailservice.core.EmailSenderUseCase;
+import com.carvalho.emailservice.adapters.EmailSenderGateway;
+import com.carvalho.emailservice.core.cases.EmailSenderUseCase;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class EmailSenderService implements EmailSenderUseCase {
 
-    private final EmailSenderGatewar emailSenderGatewar;
+    private final EmailSenderGateway emailSenderGateway;
 
     @Autowired
-    public EmailSenderService(EmailSenderGatewar emailGatewar) {
-        this.emailSenderGatewar = emailGatewar;
+    public EmailSenderService(EmailSenderGateway emailSenderGateway) {
+        this.emailSenderGateway = emailSenderGateway;
     }
 
     @Override
-    public void sendEmail(String to, String subject, String body) {
-
+    public void sendEmail(String toEmail, String subject, String body) {
+        emailSenderGateway.sendEmail(toEmail, subject, body);
     }
-
 }
